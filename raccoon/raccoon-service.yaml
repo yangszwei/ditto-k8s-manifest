@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: raccoon-service
+  labels:
+    app: raccoon
+spec:
+  selector:
+    app: raccoon
+  ports:
+    - protocol: TCP
+      port: 8081
+      targetPort: http-raccoon
+  type: ClusterIP

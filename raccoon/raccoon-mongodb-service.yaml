@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: raccoon-mongodb-service
+  labels:
+    app: raccoon-mongodb
+spec:
+  selector:
+    app: raccoon-mongodb
+  ports:
+    - protocol: TCP
+      port: 27017
+      targetPort: mongodb
+  type: ClusterIP

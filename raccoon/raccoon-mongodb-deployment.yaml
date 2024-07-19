@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: raccoon-mongodb-deployment
+spec:
+  selector:
+    matchLabels:
+      app: raccoon-mongodb
+  template:
+    metadata:
+      labels:
+        app: raccoon-mongodb
+    spec:
+      containers:
+        - name: mongodb
+          image: mongo:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 27017
+              name: mongodb
+              protocol: TCP
+          env:
+            - name: MONGO_INITDB_ROOT_USERNAME
+              value: root
+            - name: MONGO_INITDB_ROOT_PASSWORD
+              value: root
+          volumeMounts:
+            - mountPath: /data/db
+              name: raccoon-mongodb-pv
+      volumes:
+        - name: raccoon-mongodb-pv
+          persistentVolumeClaim:
+            claimName: raccoon-mongodb-pvc
