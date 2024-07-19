@@ -9,6 +9,13 @@ spec:
   rules:
     - http:
         paths:
+          - path: /grafana
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: grafana-service
+                port:
+                  number: 3000
           - path: /mainecoon
             pathType: ImplementationSpecific
             backend:
