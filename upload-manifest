@@ -1,0 +1,10 @@
+#!/bin/bash
+#
+# Syncs the Kubernetes manifests to the given location.
+
+if [ "$#" -ne 1 ]; then
+    echo "Usage: $0 <destination>"
+    exit 1
+fi
+
+rsync -av --prune-empty-dirs --include '*/' --include '*.yaml' --exclude '*' . "$1"
